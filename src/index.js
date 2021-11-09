@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {hydrate, render} from "react-dom";
 import {Provider} from 'react-redux';
 import {ConnectedRouter} from "connected-react-router";
 import store, {history} from './store/configureStore';
@@ -13,4 +13,9 @@ const app = (
     </Provider>
 );
 
-ReactDOM.render(app, document.getElementById('root'));
+const rootElement = document.getElementById("root");
+if (rootElement.hasChildNodes()) {
+    hydrate(app, rootElement);
+} else {
+    render(app, rootElement);
+}
